@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Models\Website;
 use App\Notifications\NewPostNotification;
@@ -35,13 +36,7 @@ class PostController extends Controller
 
         // Response
 
-        return response()->json([
-            'data' => [
-                'id' => $post->id,
-                'title' => $post->title,
-                'body' => $post->body
-            ]
-        ], 201);
+        return new PostResource($post);
     }
 
     /**
@@ -52,10 +47,6 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return response()->json([
-            'data' => [
-                'post' => $post
-            ]
-        ]);
+        return new PostResource($post);
     }
 }
