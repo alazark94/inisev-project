@@ -45,6 +45,6 @@ class NewPostNotification extends Notification implements ShouldQueue
     {
         return (new MailMessage)
             ->subject('New Post Published')
-            ->markdown('mail.post.published', ['post' => $this->post]);
+            ->markdown('mail.post.published', ['post' => $this->post, 'url' => url("/api/posts/{$this->post->id}")]);
     }
 }

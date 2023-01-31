@@ -3,7 +3,7 @@
 
 {{$post->title}}
 
-<x-mail::button :url="'/api/posts/'. $post->id">
+<x-mail::button :url="$url">
 View Post
 </x-mail::button>
 
