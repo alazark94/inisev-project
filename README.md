@@ -46,10 +46,10 @@ To subscribe new user to a website you should hit the `/api/websites/{websiteId}
 
 _Attributes_
 
-| Field   | Type   | Required | Note                |
-| ------- | ------ | -------- | ------------------- |
-| `name`  | string |          | -                   |
-| `email` | string | &check;  | Unique, Valid Email |
+| Field   | Type   | Required | Note        |
+| ------- | ------ | -------- | ----------- |
+| `name`  | string |          | -           |
+| `email` | string | &check;  | Valid Email |
 
 To Create a new post for a website you should hit the `/api/websites/{websiteId}/posts` with a `POST` request.
 
