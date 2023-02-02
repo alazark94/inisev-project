@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Website;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class SubscribeController extends Controller
 {
@@ -20,14 +22,18 @@ class SubscribeController extends Controller
         $validated = $request->validate(
             [
                 'name' => ['nullable'],
-                'email' => ['required', 'email', Rule::unique('users', 'email')]
+                'email' => ['required', 'email']
             ],
-            $messages = [
-                'email.unique' => 'The email you provide has already subscribed for the given website'
-            ]
         );
 
         // Create and Attach
+        $user = User::where('website_id', $website->id)->where('email', $validated['email'])->first();
+        if ($user) {
+            return response()->json([
+                'email' => 'This email is already subscribed to this website.'
+            ], 422);
+        }
+
         $user = $website->users()->create($validated);
 
         // Response
